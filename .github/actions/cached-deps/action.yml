@@ -26,8 +26,3 @@ runs:
         npm ci
         echo "cache='${{ inputs.caching }}'" >> $GITHUB_OUTPUT
       shell: bash
-  information:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run custom action
-        uses: ./.github/actions/deploy-s3-javascript
