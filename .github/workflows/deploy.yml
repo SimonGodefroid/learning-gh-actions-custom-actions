@@ -12,7 +12,7 @@ jobs:
       - name: Load and cache dependencies
         id: cache-deps
         uses: ./.github/actions/cached-deps
-        with: 
+        with:
           caching: false
       - name: Output information
         run: echo "Cache used? ${{ steps.cache-deps.outputs.used-cache }}"
@@ -63,14 +63,19 @@ jobs:
       - name: Output contents
         run: ls
       - name: Deploy site
+        id: deploy
         uses: ./.github/actions/deploy-s3-javascript
-        env: 
+        env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # needed by aws cli
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # set in GH as secret
         with:
           bucket: 'whatever'
           dist-folder: ./dist
           # region: 'us-east-2'
+      - name: Output website URL
+        run: |
+          echo "Live URL ${{ steps.deploy.outputs.website-url }}"
+
   # information:
   #   runs-on: ubuntu-latest
   #   steps:
