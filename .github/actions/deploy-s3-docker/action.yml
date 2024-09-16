@@ -1,0 +1,20 @@
+name: 'Deploy to AWS S3'
+description: 'Deploy your site to AWS S3'
+inputs:
+  bucket:
+    description: 'S3 bucket name'
+    required: true
+  region: 
+    description: 'AWS Region'
+    required: false
+    default: 'us-east-1'
+  dist-folder:
+    description: 'Folder to deploy'
+    required: true
+outputs:
+  website-url:
+    description: 'URL of the deployed site'
+runs: 
+  using: 'docker'     
+  main: 'Dockerfile' # or the path of the Dockerfile or a publicly published Dockerfile
+
